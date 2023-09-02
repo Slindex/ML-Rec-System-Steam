@@ -1,13 +1,13 @@
 import pandas as pd
 
 
-path_userdata = '../data/functions/userdata.csv'
+path_userdata = 'data/functions/userdata.csv'
 df_userdata = pd.read_csv(path_userdata)
 
-path_countreviews = '../data/functions/countreviews.csv'
+path_countreviews = 'data/functions/countreviews.csv'
 df_countreviews = pd.read_csv(path_countreviews)
 
-path_genre = '../data/functions/genre.csv'
+path_genre = 'data/functions/genre.csv'
 df_genre = pd.read_csv(path_genre)
 
 

@@ -1,6 +1,5 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
 import functions as ft
-import pandas as pd
 import importlib
 
 importlib.reload(ft)
