@@ -23,3 +23,11 @@ async def countreviews(startdate: str, endate:str):
 @app.get("/genre/{genre}")
 async def genre(genre: str):
     return ft.genre(genre)
+
+@app.get("/userforgenre/{genre}")
+async def userforgenre(genre: str):
+    return ft.userforgenre(genre)
+
+@app.get("/developer/{dev}")
+async def developer(dev: str):
+    return ft.developer(dev)
