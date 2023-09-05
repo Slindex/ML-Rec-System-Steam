@@ -12,9 +12,9 @@ app = FastAPI()
 # The method invokes a function returning a string
 
 
-@app.get("/userdata/{User_id}")
-async def userdata(User_id: str):
-    return ft.userdata(User_id)
+@app.get("/userdata/{user_id}")
+async def userdata(user_id: str):
+    return ft.userdata(user_id)
 
 @app.get("/countreviews")
 async def countreviews(startdate: str, endate:str):
@@ -31,3 +31,7 @@ async def userforgenre(genre: str):
 @app.get("/developer/{dev}")
 async def developer(dev: str):
     return ft.developer(dev)
+
+@app.get("/game_recommendation/{game_id}")
+async def game_recommendation(game_id: int):
+    return ft.game_recommendation(game_id)

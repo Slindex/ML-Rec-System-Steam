@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 
 path_userdata = 'data/functions/userdata.csv'
@@ -6,23 +7,25 @@ path_countreviews = 'data/functions/countreviews.csv'
 path_genre = 'data/functions/genre.csv'
 path_userforgenre = 'data/functions/userforgenre.csv'
 path_developer = 'data/functions/developer.csv'
+path_model = 'data/ml-model/df_model.csv'
 
 df_userdata = pd.read_csv(path_userdata)
 df_countreviews = pd.read_csv(path_countreviews)
 df_genre = pd.read_csv(path_genre)
 df_ufgenre = pd.read_csv(path_userforgenre)
 df_developer = pd.read_csv(path_developer)
+df_model = pd.read_csv(path_model)
 
 
-def userdata(User_id: str):
+def userdata(user_id: str):
 
-    spent = df_userdata['total_spent'][df_userdata['user_id'] == User_id]
+    spent = df_userdata['total_spent'][df_userdata['user_id'] == user_id]
     total_spent = float(spent.iloc[0])
 
-    item_qty = df_userdata['total_items'][df_userdata['user_id'] == User_id]
+    item_qty = df_userdata['total_items'][df_userdata['user_id'] == user_id]
     total_items = int(item_qty.iloc[0])
 
-    recom_qty = df_userdata['total_recom'][df_userdata['user_id'] == User_id]
+    recom_qty = df_userdata['total_recom'][df_userdata['user_id'] == user_id]
     total_recom = int(recom_qty.iloc[0])
 
     recom_per = (total_recom / total_items)*100
@@ -103,5 +106,18 @@ def developer(dev: str):
         info.append(row_data)
     
     info = [{'year': int(dic['year']), 'free_%': dic['free_%']} for dic in info]
+
+    return info
+
+def game_recommendation(game_id: int):
+
+    path = 'data/ml-model/cosine_sim.npy'
+    cosine_sim = np.load(path)
+
+    idx = df_model[df_model['id'] == game_id].index[0]
+    rec_games = df_model['app_name'].iloc[cosine_sim[idx]]
+
+    info = {'recommendations': None}
+    info['recommendations'] = list(rec_games)
 
     return info
